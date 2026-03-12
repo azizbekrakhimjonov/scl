@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
 import AppHeader from '@/components/AppHeader';
 import RoleSwitcher from '@/components/RoleSwitcher';
@@ -13,6 +13,8 @@ export default function SubjectDetailPage() {
   const navigate = useNavigate();
   const { subjects, materials, tests, tasks, currentUser } = useApp();
   const [activeTab, setActiveTab] = useState<TabType>('materials');
+
+  if (!currentUser) return <Navigate to="/" replace />;
 
   const subject = subjects.find(s => s.id === subjectId);
   const subjectMaterials = materials.filter(m => m.subjectId === subjectId);

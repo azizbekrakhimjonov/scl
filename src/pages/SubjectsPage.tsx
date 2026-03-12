@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
 import AppHeader from '@/components/AppHeader';
 import RoleSwitcher from '@/components/RoleSwitcher';
@@ -7,6 +7,8 @@ import { ChevronRight, BookOpen } from 'lucide-react';
 export default function SubjectsPage() {
   const { subjects, currentUser } = useApp();
   const navigate = useNavigate();
+
+  if (!currentUser) return <Navigate to="/" replace />;
 
   return (
     <div className="min-h-screen bg-background">
