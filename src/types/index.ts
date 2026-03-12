@@ -4,6 +4,8 @@ export interface User {
   id: string;
   name: string;
   role: UserRole;
+  email: string;
+  password: string;
 }
 
 export interface Subject {
