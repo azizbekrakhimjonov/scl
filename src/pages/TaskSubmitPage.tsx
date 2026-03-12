@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
 import AppHeader from '@/components/AppHeader';
 import { Upload, CheckCircle } from 'lucide-react';
