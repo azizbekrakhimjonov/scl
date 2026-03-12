@@ -3,14 +3,15 @@ import { User, Subject, DidacticMaterial, Task, Test, StudentAnswer, TaskSubmiss
 import { mockUsers, mockSubjects, mockMaterials, mockTasks, mockTests, mockStudentAnswers, mockTaskSubmissions } from '@/data/mockData';
 
 interface AppState {
-  currentUser: User;
+  currentUser: User | null;
   subjects: Subject[];
   materials: DidacticMaterial[];
   tasks: Task[];
   tests: Test[];
   studentAnswers: StudentAnswer[];
   taskSubmissions: TaskSubmission[];
-  switchRole: () => void;
+  login: (email: string, password: string) => boolean;
+  logout: () => void;
   submitTestAnswers: (testId: string, answers: Record<string, number>) => number;
   submitTask: (taskId: string, fileName: string) => void;
   addMaterial: (material: Omit<DidacticMaterial, 'id'>) => void;
@@ -21,7 +22,7 @@ interface AppState {
 const AppContext = createContext<AppState | null>(null);
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [userIndex, setUserIndex] = useState(0);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [subjects] = useState(mockSubjects);
   const [materials, setMaterials] = useState(mockMaterials);
   const [tasks, setTasks] = useState(mockTasks);
@@ -29,13 +30,21 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [studentAnswers, setStudentAnswers] = useState(mockStudentAnswers);
   const [taskSubmissions, setTaskSubmissions] = useState(mockTaskSubmissions);
 
-  const currentUser = mockUsers[userIndex];
+  const login = (email: string, password: string): boolean => {
+    const user = mockUsers.find(u => u.email === email && u.password === password);
+    if (user) {
+      setCurrentUser(user);
+      return true;
+    }
+    return false;
+  };
 
-  const switchRole = () => {
-    setUserIndex(prev => prev === 0 ? 1 : 0);
+  const logout = () => {
+    setCurrentUser(null);
   };
 
   const submitTestAnswers = (testId: string, answers: Record<string, number>): number => {
+    if (!currentUser) return 0;
     const test = tests.find(t => t.id === testId);
     if (!test) return 0;
     let score = 0;
@@ -57,6 +66,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   };
 
   const submitTask = (taskId: string, fileName: string) => {
+    if (!currentUser) return;
     const newSubmission: TaskSubmission = {
       id: `ts-${Date.now()}`,
       studentId: currentUser.id,
@@ -83,7 +93,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   return (
     <AppContext.Provider value={{
       currentUser, subjects, materials, tasks, tests, studentAnswers, taskSubmissions,
-      switchRole, submitTestAnswers, submitTask, addMaterial, addTask, addTest,
+      login, logout, submitTestAnswers, submitTask, addMaterial, addTask, addTest,
     }}>
       {children}
     </AppContext.Provider>

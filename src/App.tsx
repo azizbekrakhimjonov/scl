@@ -24,7 +24,7 @@ const App = () => (
         <BrowserRouter>
           <div className="max-w-md mx-auto min-h-screen bg-background">
             <Routes>
-              <Route path="/" element={<WelcomePage />} />
+              <Route path="/" element={<LoginPage />} />
               <Route path="/subjects" element={<SubjectsPage />} />
               <Route path="/subjects/:subjectId" element={<SubjectDetailPage />} />
               <Route path="/subjects/:subjectId/add-material" element={<AddMaterialPage />} />
