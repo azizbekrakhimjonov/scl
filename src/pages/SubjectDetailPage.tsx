@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useApp } from '@/context/AppContext';
 import AppHeader from '@/components/AppHeader';
 import RoleSwitcher from '@/components/RoleSwitcher';
