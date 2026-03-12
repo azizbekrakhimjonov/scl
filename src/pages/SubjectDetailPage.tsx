@@ -14,6 +14,8 @@ export default function SubjectDetailPage() {
   const { subjects, materials, tests, tasks, currentUser } = useApp();
   const [activeTab, setActiveTab] = useState<TabType>('materials');
 
+  if (!currentUser) return <Navigate to="/" replace />;
+
   const subject = subjects.find(s => s.id === subjectId);
   const subjectMaterials = materials.filter(m => m.subjectId === subjectId);
   const subjectTests = tests.filter(t => t.subjectId === subjectId);
