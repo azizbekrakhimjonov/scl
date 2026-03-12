@@ -1,10 +1,10 @@
 import { Subject, DidacticMaterial, Task, Test, StudentAnswer, TaskSubmission, User } from '@/types';
 
 export const mockUsers: User[] = [
-  { id: 'teacher-1', name: "Karimov Sardor", role: 'teacher' },
-  { id: 'student-1', name: "Aliyev Jasur", role: 'student' },
-  { id: 'student-2', name: "Rahimova Dilnoza", role: 'student' },
-  { id: 'student-3', name: "Toshmatov Bekzod", role: 'student' },
+  { id: 'teacher-1', name: "Karimov Sardor", role: 'teacher', email: 'sardor@teacher.uz', password: '123456' },
+  { id: 'student-1', name: "Aliyev Jasur", role: 'student', email: 'jasur@student.uz', password: '123456' },
+  { id: 'student-2', name: "Rahimova Dilnoza", role: 'student', email: 'dilnoza@student.uz', password: '123456' },
+  { id: 'student-3', name: "Toshmatov Bekzod", role: 'student', email: 'bekzod@student.uz', password: '123456' },
 ];
 
 export const mockSubjects: Subject[] = [

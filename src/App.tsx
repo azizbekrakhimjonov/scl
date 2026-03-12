@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppProvider } from "@/context/AppContext";
-import WelcomePage from "./pages/WelcomePage";
+import LoginPage from "./pages/LoginPage";
 import SubjectsPage from "./pages/SubjectsPage";
 import SubjectDetailPage from "./pages/SubjectDetailPage";
 import TestTakingPage from "./pages/TestTakingPage";
@@ -24,7 +24,7 @@ const App = () => (
         <BrowserRouter>
           <div className="max-w-md mx-auto min-h-screen bg-background">
             <Routes>
-              <Route path="/" element={<WelcomePage />} />
+              <Route path="/" element={<LoginPage />} />
               <Route path="/subjects" element={<SubjectsPage />} />
               <Route path="/subjects/:subjectId" element={<SubjectDetailPage />} />
               <Route path="/subjects/:subjectId/add-material" element={<AddMaterialPage />} />
